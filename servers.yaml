@@ -10,4 +10,4 @@
   shell_commands: 
       - { shell: 'yum install -y wget git lvm2 device-mapper-libs vim' }
       - { shell: '/opt/puppetlabs/puppet/bin/gem install r10k && ln -s /opt/puppetlabs/puppet/bin/r10k /usr/bin/r10k || true'}
-      - { shell: 'cp /home/vagrant/node-01/Puppetfile /tmp/vagrant-puppet/environments/production && cd /tmp/vagrant-puppet/environments/production && r10k puppetfile install --verbose' }
+      - { shell: 'cd /tmp/vagrant-puppet/environments/production && r10k puppetfile install --verbose' }
