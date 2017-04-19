@@ -2,7 +2,6 @@ require "rake"
 require 'bundler'
 Bundler.require(:rake)
 require 'rake/clean'
- 
 
 desc "Executes Vagrant up"
 task :build do       
@@ -12,7 +11,3 @@ task :build do
     end   
       execute "vagrant up"
 end
-
-
-
-
