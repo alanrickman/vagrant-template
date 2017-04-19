@@ -30,6 +30,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       srv.vm.provider :virtualbox do |v|
         v.cpus = servers["cpu"]
         v.memory = servers["ram"]
+        v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+        v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
       end
     
       srv.vm.synced_folder "./", "/home/vagrant/#{servers['name']}"
