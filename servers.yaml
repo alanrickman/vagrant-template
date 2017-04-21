@@ -9,5 +9,7 @@
   ram: 2048
   shell_commands: 
       - { shell: 'yum install -y wget git lvm2 device-mapper-libs vim' }
-      - { shell: '/opt/puppetlabs/puppet/bin/gem install r10k && ln -s /opt/puppetlabs/puppet/bin/r10k /usr/bin/r10k || true'}
+      - { shell: 'mkdir -p /root/.ssh' }
+      - { shell: 'grep -q github.com ~/.ssh/known_hosts || ssh-keyscan github.com >> ~/.ssh/known_hosts' }
+      - { shell: '/opt/puppetlabs/puppet/bin/gem install r10k && test -L /usr/bin/r10k || ln -s /opt/puppetlabs/puppet/bin/r10k /usr/bin/r10k || true'}
       - { shell: 'cd /tmp/vagrant-puppet/environments/production && r10k puppetfile install --verbose' }
