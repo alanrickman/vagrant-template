@@ -16,6 +16,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
  
   # Iterate through entries in YAML file
   servers.each do |servers|
+
+    # Comment out lines below to speed up provisioning by disabling 
+    # installation of Virtualbox guest tools
+    #config.vbguest.auto_update = false
+    #config.vbguest.no_install = true
+
+    # Enable SSH forwarding
+		config.ssh.forward_agent = true		
       
     config.vm.define servers["name"] do |srv|
       
