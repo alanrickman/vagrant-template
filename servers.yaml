@@ -13,3 +13,4 @@
       - { shell: 'grep -q github.com ~/.ssh/known_hosts || ssh-keyscan github.com >> ~/.ssh/known_hosts' }
       - { shell: '/opt/puppetlabs/puppet/bin/gem install r10k && test -L /usr/bin/r10k || ln -s /opt/puppetlabs/puppet/bin/r10k /usr/bin/r10k || true'}
       - { shell: 'cd /tmp/vagrant-puppet/environments/production && r10k puppetfile install --verbose' }
+      - { shell: 'cp -R /home/vagrant/node-01/local/modules/* /tmp/vagrant-puppet/environments/production/modules/'}
