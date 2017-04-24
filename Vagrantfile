@@ -19,11 +19,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     # Comment out lines below to speed up provisioning by disabling 
     # installation of Virtualbox guest tools
-    #config.vbguest.auto_update = false
-    #config.vbguest.no_install = true
+    config.vbguest.auto_update = false
+    config.vbguest.no_install = true
 
     # Enable SSH forwarding
-		config.ssh.forward_agent = true		
+		config.ssh.forward_agent = true
+
+    # Enable hostmanager (adds entries to /etc/hosts)
+    config.hostmanager.enabled = true
+    config.hostmanager.manage_host = true
+    config.hostmanager.manage_guest = true
+    config.hostmanager.ignore_private_ip = false
       
     config.vm.define servers["name"] do |srv|
       
