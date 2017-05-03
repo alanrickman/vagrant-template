@@ -8,9 +8,12 @@
       - { guest: 80, host: 8080 }
   ram: 2048
   shell_commands: 
-      - { shell: 'yum install -y wget git lvm2 device-mapper-libs vim' }
-      - { shell: 'mkdir -p /root/.ssh' }
-      - { shell: 'grep -q github.com ~/.ssh/known_hosts || ssh-keyscan github.com >> ~/.ssh/known_hosts' }
+      - { shell: 'test -f /tmp/provision.done || yum install -y wget git lvm2 device-mapper-libs vim' }
+      - { shell: 'test -f /tmp/provision.done || echo -e "PEERDNS=no\nDNS1=127.0.0.1\nDNS2=8.8.8.8">>/etc/sysconfig/network-scripts/ifcfg-enp0s3 && systemctl restart network'}
+      - { shell: 'test -f /tmp/provision.done || mkdir -p /root/.ssh' }
+      - { shell: 'test -f /tmp/provision.done || grep -q github.com ~/.ssh/known_hosts || ssh-keyscan github.com >> ~/.ssh/known_hosts' }
+      - { shell: 'test -f /tmp/provision.done || systemctl disable firewalld && systemctl stop firewalld'}
+      - { shell: 'test -f /tmp/provision.done || touch /tmp/provision.done'}
       - { shell: '/opt/puppetlabs/puppet/bin/gem install r10k && test -L /usr/bin/r10k || ln -s /opt/puppetlabs/puppet/bin/r10k /usr/bin/r10k || true'}
       - { shell: 'cd /tmp/vagrant-puppet/environments/production && r10k puppetfile install --verbose' }
       - { shell: 'cp -R /home/vagrant/node-01/local/modules/* /tmp/vagrant-puppet/environments/production/modules/'}
