@@ -30,7 +30,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.hostmanager.manage_host = true
     config.hostmanager.manage_guest = true
     config.hostmanager.ignore_private_ip = false
-
+      
     config.vm.define servers["name"] do |srv|
 
       srv.vm.hostname = servers["name"]
